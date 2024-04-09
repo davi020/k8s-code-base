@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: example-app-1
+  name: example-app-1-config
   namespace: appplication1
 data:
   config.json: |
