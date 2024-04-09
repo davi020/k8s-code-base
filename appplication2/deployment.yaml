@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: static-sample
+  namespace: application2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: static-sample
+  template:
+    metadata:
+      labels:
+        app: static-sample
+    spec:
+      containers:
+        - image: docker.io/johnsonkdavid/nodejs:1712412817 
+          imagePullPolicy: IfNotPresent
+          name: static-sample
