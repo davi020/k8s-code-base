@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app-deployment
+  labels:
+    app: my-app
+  namespace: application1
+spec:
+  selector:
+    matchLabels:
+      app: my-app
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  template:
+    metadata:
+      labels:
+        app: my-app
+    spec:
+      containers:
+      - name: my-aws-cli
+        image: amazon/aws-cli
+        ports:
+        - containerPort: 80
+        command: ["/bin/sh", "-ec", "while :; do echo '.'; sleep 5 ; done"]
+      volumes:
+      - name: config-volume
+        configMap:
+          name: example-app-1-config
